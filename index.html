@@ -94,7 +94,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1p
 <footer class="credit">Prepared by <b>Fr. Solomon Anthony Nirmalan, CMF</b></footer>
 
 <script>
-const ORDER = ["L","C","P","O"];
+const ORDER = ["L","M","C","P","O"];
 const VOWS = {
   L:{name:"Prayer and Life", short:"prayer that reaches my hands",
      verse:"But a Samaritan traveller who came upon him was moved with compassion at the sight.", ref:"Luke 10:33",
@@ -102,6 +102,12 @@ const VOWS = {
      grow:"The Lord may be inviting you to let your prayer touch your daily life more: how you notice people, how you care for them, and how patient and gentle you are after you leave the chapel.",
      question:"In the parable, the priest and the Levite passed by. When have I passed by someone because I was busy with holy things?",
      steps:["Before you leave the chapel, name one person you will serve with more patience today.","Bring the faces of the people you serve into your prayer, one by one, by name.","At night, ask: where did I meet the Lord in a person today, and where did I pass by?"]},
+  M:{name:"Community Life", short:"one body, sent out and welcomed home",
+     verse:"That they may all be one, as you, Father, are in me and I in you... so that the world may believe that you sent me.", ref:"John 17:21",
+     strong:"You seem to help make your community a real home. You keep its life even when you are busy, you welcome sisters who come back from mission, and you say thank you. Thank God for this. A united house is the first witness of our mission.",
+     grow:"The Lord may be inviting you to give more to the life of your community: to keep its prayer and table even in busy times, to welcome the sister who comes home tired, and to say aloud what you appreciate in others.",
+     question:"Is my community a place I go out from and come back to with joy? What part of that depends on me?",
+     steps:["Keep one community meal and one recreation this week, whatever your work.","When a sister comes home from mission, ask her one question about her day and really listen.","Tell one sister each day, simply, something you appreciate in her."]},
   C:{name:"Chastity", short:"a heart that loves freely",
      verse:"Lord, you know everything; you know that I love you.", ref:"John 21:17",
      strong:"Your heart seems to rest in the Lord, and your love for your sisters is warm and open. Thank God for this gift. Ask how you can share this warmth with a sister who feels left out.",
@@ -128,6 +134,11 @@ const QUESTIONS = [
     ["I listen quickly, but my mind is on reaching the chapel on time.",1],
     ["I stop and listen to her. The Lord in the chapel will wait for me.",3],
     ["I tell her to come back later, and then I forget about it.",0]]},
+  {v:"M", q:"It is a busy season in the mission. How much of community life do you keep, such as prayer, meals and recreation together?", o:[
+    ["I try, but I am often late or my mind is on my work.",2],
+    ["Very little. The mission comes first, and the community understands.",0],
+    ["I keep most of it, even when it costs me some work.",3],
+    ["I keep community prayer, but I usually miss meals and recreation.",1]]},
   {v:"C", q:"After a long and tiring day in the mission, you come home feeling lonely and unseen. What do you usually do?", o:[
     ["I pick up my phone and scroll until I feel better.",1],
     ["I spend a few quiet minutes with the Lord in the chapel and tell him how I feel.",3],
@@ -148,6 +159,11 @@ const QUESTIONS = [
     ["I see her as someone the Lord has placed in front of me, and I treat her gently.",3],
     ["I stay polite to her face, but I complain about her later.",1],
     ["I try to be patient, and often something from my prayer comes back to me.",2]]},
+  {v:"M", q:"You come home after a hard week in the mission, and no one asks about your work. What do you usually do?", o:[
+    ["I feel hurt and withdraw to my room for the evening.",1],
+    ["I share a little about my week, and I still do my part in the house.",3],
+    ["I complain to a sister that nobody cares about what I do.",0],
+    ["I let it go, though it hurts a little, and I do my part in the house.",2]]},
   {v:"C", q:"In your community, the same two or three sisters always sit and talk together. You are one of them. What do you do?", o:[
     ["I see it is natural. Everyone has close friends.",1],
     ["I notice it, but I find it hard to change.",2],
@@ -168,6 +184,11 @@ const QUESTIONS = [
     ["Often. I bring them before the Lord by name.",3],
     ["Not really. I keep my prayer and my work apart.",0],
     ["Sometimes, when someone's situation is very serious.",2]]},
+  {v:"M", q:"A sister comes home late and worn out from an outreach programme. How do you welcome her?", o:[
+    ["I keep some food for her, ask how it went, and let her rest.",3],
+    ["I greet her, but I do not really ask about her day.",1],
+    ["I remind her of the house duties she missed.",0],
+    ["I keep food for her, but I am too busy to sit with her.",2]]},
   {v:"C", q:"During recreation, a sister begins to speak badly about another sister who is not present. What do you do?", o:[
     ["I listen with interest.",1],
     ["I add something I know about her too.",0],
@@ -188,6 +209,16 @@ const QUESTIONS = [
     ["I go to her gently, ask how she is, and keep her in my prayer.",3],
     ["I did not really notice. I am busy with my own things.",0],
     ["I mention it to the superior so that someone can help her.",2]]},
+  {v:"M", q:"When a sister does something well, like a good meal, a hard task finished, or a success in her mission, what do you usually do?", o:[
+    ["I appreciate her in my heart, but I rarely say it.",2],
+    ["I notice more easily what she did wrong.",0],
+    ["I tell her simply and sincerely, and sometimes in front of others.",3],
+    ["I find it hard to praise her, especially when others are already praising her.",1]]},
+  {v:"M", check:true, q:"Do you feel appreciated in your community?", note:"This answer is not part of your result. It is only for you, and for your prayer.", o:[
+    ["Yes, mostly.",0],
+    ["Sometimes.",1],
+    ["Rarely.",2],
+    ["I often feel taken for granted.",3]]},
   {v:"C", q:"How would you describe the place of your phone in your life in community?", o:[
     ["It stays away during prayer, meals and community time.",3],
     ["It is often the first and last thing I look at each day.",1],
@@ -223,18 +254,18 @@ function intro(){
       <span class="eyebrow">Day of Recollection</span>
       <h1>Living My Vows</h1>
       <p class="byline">A reflection by Fr. Solomon Anthony Nirmalan, CMF</p>
-      <p>Before you renew your vows, take a few quiet minutes with this reflection. You will meet sixteen simple situations from prayer and community life. Choose the answer that is closest to how you really live, not how you would like to live.</p>
+      <p>Before you renew your vows, take a few quiet minutes with this reflection. You will meet twenty simple situations from prayer and community life, and one quiet question about how you feel at home. Choose the answer that is closest to how you really live, not how you would like to live.</p>
       <p>If none of the answers truly fits you, you may choose "None of these describes me" and write a few words of your own. Use it only when none truly fits.</p>
       <p class="verse">I will lead her into the desert and speak to her heart.<cite>Hosea 2:14</cite></p>
-      <p class="meta">16 situations · about 11 minutes · your answers stay on this phone</p>
+      <p class="meta">20 situations and 1 check-in · about 14 minutes · your answers stay on this phone</p>
       <button class="btn" id="start">Begin in prayer</button>
     </div>
     <p class="note">This is a mirror for prayer, not a test. No one sees your answers, and there are no marks.</p>
     <details class="about" id="about">
       <summary>About this reflection</summary>
       <div class="about-body">
-        <p>Living My Vows is a short reflection for consecrated women preparing to renew their vows. It was prepared for a day of recollection on chastity, poverty and obedience as they are lived in community, with prayer as the root of all three.</p>
-        <p>You meet sixteen situations from everyday convent and mission life and choose the answer closest to how you really live. At the end you see which area is a gift to thank God for and which one is an invitation to grow. Each comes with a passage from Scripture, a question for prayer and a few small steps for the week. You can then write your own renewal intention.</p>
+        <p>Living My Vows is a short reflection for consecrated women preparing to renew their vows. It was prepared for a day of recollection on chastity, poverty and obedience as they are lived in community. Prayer is the root of all three, and community is the home we go out from in mission and come back to.</p>
+        <p>You meet twenty situations from everyday convent and mission life and choose the answer closest to how you really live. At the end you see which area is a gift to thank God for and which one is an invitation to grow. Each comes with a passage from Scripture, a question for prayer and a few small steps for the week. You can then write your own renewal intention.</p>
         <p>The reflection is a mirror for personal prayer. It is not a test or an evaluation, and its results should not be used to compare sisters. Nothing is sent anywhere. Your answers stay only on your own phone.</p>
       </div>
     </details>
@@ -260,18 +291,19 @@ function question(){
   const isNone = answers[i]==="none";
   app.innerHTML = `
     <div class="progress">
-      <div class="step"><span class="vowtag">${VOWS[item.v].name}</span><span>${i+1} of ${N}</span></div>
+      <div class="step"><span class="vowtag">${item.check?"A quiet check-in":VOWS[item.v].name}</span><span>${i+1} of ${N}</span></div>
       <div class="track"><div class="fill" style="width:${pct}%"></div></div>
     </div>
     <div class="card">
       <h2>${esc(item.q)}</h2>
+      ${item.note?`<p class="note">${esc(item.note)}</p>`:""}
       <div class="opts">${item.o.map((o,k)=>`<button class="opt${answers[i]===k?" picked":""}" data-k="${k}" id="opt-${i}-${k}">${esc(o[0])}</button>`).join("")}</div>
-      <button class="none-opt${isNone?" picked":""}" id="none-${i}">None of these describes me</button>
+      ${item.check?"":`<button class="none-opt${isNone?" picked":""}" id="none-${i}">None of these describes me</button>
       <div class="notebox" id="notebox"${isNone?"":" hidden"}>
         <label for="note-${i}">In a few words, what would you do? (optional)</label>
         <textarea id="note-${i}" placeholder="Write it as you would say it to the Lord">${esc(notes[i])}</textarea>
         <button class="btn" id="cont">Continue</button>
-      </div>
+      </div>`}
     </div>
     <div class="row">${i>0?`<button class="link" id="back">Back</button>`:""}</div>`;
   app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
@@ -280,14 +312,14 @@ function question(){
     b.classList.add("picked");
     setTimeout(next,220);
   });
-  document.getElementById("none-"+i).onclick=()=>{
+  if(!item.check) document.getElementById("none-"+i).onclick=()=>{
     answers[i]="none";
     app.querySelectorAll(".opt").forEach(x=>x.classList.remove("picked"));
     document.getElementById("none-"+i).classList.add("picked");
     document.getElementById("notebox").hidden=false;
     document.getElementById("note-"+i).focus();
   };
-  document.getElementById("cont").onclick=()=>{
+  if(!item.check) document.getElementById("cont").onclick=()=>{
     notes[i]=document.getElementById("note-"+i).value.trim();
     next();
   };
@@ -307,7 +339,7 @@ function computeScores(){
   ORDER.forEach(v=>{
     let sum=0, answered=0, skipped=0;
     QUESTIONS.forEach((q,k)=>{
-      if(q.v!==v) return;
+      if(q.v!==v||q.check) return;
       if(answers[k]==="none"||answers[k]===null){skipped++;return;}
       sum+=q.o[answers[k]][1]; answered++;
     });
@@ -325,6 +357,33 @@ function result(){
     grow=scored.reduce((a,b)=>score[b]<score[a]?b:a);
   }
   const balanced = !scored.length || score[strong]===score[grow];
+  const ci = QUESTIONS.findIndex(q=>q.check);
+  const felt = answers[ci];
+  let feltCard = "";
+  if(felt===2||felt===3){
+    feltCard = `
+    <div class="card">
+      <span class="pill gold">A word for you</span>
+      <h2>You are precious</h2>
+      <p class="verse">You are precious in my eyes, and honoured, and I love you.<cite>Isaiah 43:4</cite></p>
+      <p>It hurts to give yourself in the mission and feel unnoticed at home. Bring this hurt to the Lord, who sees everything you do. If you can, share it gently with a sister you trust or with your superior.</p>
+      <p>Remember too that appreciation often begins to grow in a house when one person starts giving it. You may be that person.</p>
+    </div>`;
+  } else if(felt===1){
+    feltCard = `
+    <div class="card">
+      <span class="pill">A word for you</span>
+      <h2>Seen at times</h2>
+      <p>Thank God for the moments when you feel seen and valued. Then look around your house. Another sister may be waiting for a word of appreciation, and you can give it.</p>
+    </div>`;
+  } else if(felt===0){
+    feltCard = `
+    <div class="card">
+      <span class="pill">A word for you</span>
+      <h2>A gift to give thanks for</h2>
+      <p>You feel appreciated in your community. Thank God for your sisters, and tell one of them this week how much that means to you.</p>
+    </div>`;
+  }
   const own = QUESTIONS.map((q,k)=>({q:q.q,v:q.v,n:notes[k]})).filter((x,k)=>answers[k]==="none"&&x.n);
 
   let middle;
@@ -338,7 +397,7 @@ function result(){
   } else if(balanced){
     middle = `
     <div class="card">
-      <span class="pill">Prayer and the three vows</span>
+      <span class="pill">Prayer, community and the vows</span>
       <h2>Living it as one</h2>
       <p>Your answers are balanced across the areas you answered. Thank the Lord for this. Pray with the one area you feel most drawn to deepen as you prepare to renew.</p>
     </div>`;
@@ -379,10 +438,12 @@ function result(){
           <div class="bar-head"><b>${VOWS[v].name}</b><span>${level(r)}</span></div>
           <div class="bar${v===grow&&!balanced?" gold":""}"><i style="width:${Math.max(4,Math.round(r*100))}%"></i></div>
         </div>`;}).join("")}</div>
-      <p class="root-note">Prayer is the root. Chastity, poverty and obedience are its fruit in community.</p>
+      <p class="root-note">Prayer is the root. Community is the home we go out from and come back to. Chastity, poverty and obedience are its fruit.</p>
     </div>
 
     ${middle}
+
+    ${feltCard}
 
     ${own.length?`
     <div class="card">
@@ -397,6 +458,7 @@ function result(){
       <h2>My renewal intention</h2>
       <p>Lord, when I renew my vows, I want to live them especially in my community by...</p>
       <div class="field"><label for="in-l">Prayer and life</label><textarea id="in-l" placeholder="for example, letting my prayer make me patient with the people I serve"></textarea></div>
+      <div class="field"><label for="in-m">Community life</label><textarea id="in-m" placeholder="for example, welcoming every sister who comes home from mission"></textarea></div>
       <div class="field"><label for="in-c">Chastity</label><textarea id="in-c" placeholder="for example, giving warm attention to every sister"></textarea></div>
       <div class="field"><label for="in-p">Poverty</label><textarea id="in-p" placeholder="for example, offering my free hour to our older sisters"></textarea></div>
       <div class="field"><label for="in-o">Obedience</label><textarea id="in-o" placeholder="for example, listening fully before I speak"></textarea></div>
@@ -407,14 +469,14 @@ function result(){
     <p class="verse">Remain in my love. Love one another as I have loved you.<cite>John 15:9, 12</cite></p>
     <div class="row"><button class="btn ghost" id="again">Begin again</button><button class="link" id="review">Review my answers</button></div>`;
 
-  ["l","c","p","o"].forEach(k=>{
+  ["l","m","c","p","o"].forEach(k=>{
     const t=document.getElementById("in-"+k);
     t.value=store.get("lmv-"+k)||"";
     t.oninput=()=>store.set("lmv-"+k,t.value);
   });
   document.getElementById("copy").onclick=()=>{
     const v=k=>document.getElementById("in-"+k).value.trim()||"...";
-    const text=`Lord, when I renew my vows, I want to let my prayer reach my life by ${v("l")}, and to live chastity by ${v("c")}, poverty by ${v("p")}, and obedience by ${v("o")}, especially in my community. Amen.`;
+    const text=`Lord, when I renew my vows, I want to let my prayer reach my life by ${v("l")}, to build up my community by ${v("m")}, and to live chastity by ${v("c")}, poverty by ${v("p")}, and obedience by ${v("o")}, especially in my community. Amen.`;
     const toast=document.getElementById("toast");
     const done=m=>{toast.textContent=m;toast.hidden=false;};
     try{
