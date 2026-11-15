@@ -84,6 +84,8 @@ textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1p
 .about summary{cursor:pointer;padding:16px 0;font-family:var(--display);font-weight:600;font-size:1.1rem;list-style-position:inside}
 .about summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .about .about-body{display:flex;flex-direction:column;gap:12px;padding-bottom:20px}
+.about .dev-name{font-family:var(--display);font-weight:600;font-size:1.05rem}
+.about .langs{font-size:.92rem;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){.fill,.opt{transition:none}}
 </style>
 </head>
@@ -234,6 +236,16 @@ function intro(){
         <p>Living My Vows is a short reflection for consecrated women preparing to renew their vows. It was prepared for a day of recollection on chastity, poverty and obedience as they are lived in community, with prayer as the root of all three.</p>
         <p>You meet sixteen situations from everyday convent and mission life and choose the answer closest to how you really live. At the end you see which area is a gift to thank God for and which one is an invitation to grow. Each comes with a passage from Scripture, a question for prayer and a few small steps for the week. You can then write your own renewal intention.</p>
         <p>The reflection is a mirror for personal prayer. It is not a test or an evaluation, and its results should not be used to compare sisters. Nothing is sent anywhere. Your answers stay only on your own phone.</p>
+      </div>
+    </details>
+    <details class="about" id="developer">
+      <summary>About the developer</summary>
+      <div class="about-body">
+        <p class="dev-name">Fr. Solomon Anthony Nirmalan, CMF</p>
+        <p>Fr. Solomon Anthony Nirmalan, CMF, is a Claretian Missionary priest with 15 years of ministry and a behavioural researcher. He is currently pursuing a Master of Arts in Behavioural Sciences, Track in Organizational and Social Systems Development, at De La Salle University. He holds bachelor's degrees in Philosophy and Theology from the National Seminary of Sri Lanka, affiliated with the Pontifical Urbaniana University in Rome.</p>
+        <p>Leadership is at the centre of his work. He studies how leaders shape organizations and communities, and his thesis focuses on transformative leadership. His research is guided by theoretical pluralism: drawing on several behavioural frameworks together to understand how people make decisions and adapt.</p>
+        <p>He works in applied behavioural science, organizational and leadership dynamics, and environmental psychology, using mixed methods to turn theoretical models into practical tools with real-world impact. His wider interests include community development, socio-economic welfare, social and institutional change, and social justice for marginalized communities.</p>
+        <p class="langs">He is fluent in Tamil, Sinhala and English.</p>
       </div>
     </details>`;
   document.getElementById("start").onclick = ()=>{i=0;question();};

@@ -11,3 +11,9 @@ Each sister meets sixteen situations from everyday convent and mission life, fou
 The tool is a mirror for personal prayer, not a validated measurement instrument. Results should not be used to compare or evaluate sisters.
 
 The whole tool is one file, `index.html`. It runs in any phone or computer browser. Answers stay on each person's own device and are never sent anywhere.
+
+## About the developer
+
+**Fr. Solomon Anthony Nirmalan, CMF**, is a Claretian Missionary priest with 15 years of ministry and a behavioural researcher. He is currently pursuing a Master of Arts in Behavioural Sciences, Track in Organizational and Social Systems Development, at De La Salle University. He holds bachelor's degrees in Philosophy and Theology from the National Seminary of Sri Lanka, affiliated with the Pontifical Urbaniana University in Rome.
+
+Leadership is at the centre of his work. He studies how leaders shape organizations and communities, and his thesis focuses on transformative leadership. His research is guided by theoretical pluralism: drawing on several behavioural frameworks together to understand how people make decisions and adapt. He works in applied behavioural science, organizational and leadership dynamics, and environmental psychology, using mixed methods to turn theoretical models into practical tools with real-world impact. His wider interests include community development, socio-economic welfare, social and institutional change, and social justice for marginalized communities. He is fluent in Tamil, Sinhala and English.
