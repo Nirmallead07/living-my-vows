@@ -1,6 +1,6 @@
 # Living My Vows
 
-A short reflection on chastity, poverty and obedience in community life, prepared for a day of recollection for sisters preparing to renew their vows.
+A short reflection on prayer, chastity, poverty and obedience in community life, prepared for a day of recollection for sisters preparing to renew their vows.
 
 Prepared by Fr. Solomon Nirmalan, CMF.
 
