@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Fr. Solomon Nirmalan, CMF">
+<meta name="description" content="A reflection on chastity, poverty and obedience in community life, for sisters preparing to renew their vows.">
+<title>Living My Vows</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: one calm card per screen, centred column, progress thread across the top */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#1E2836; --muted:#5B6676;
+  --line:#D9DEE6; --accent:#2E5A87; --accent-soft:#E3EBF4; --gold:#9A7432;
+  --display:"Spectral", Georgia, "Times New Roman", serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F151E; --surface:#18212D; --ink:#E5E9F0; --muted:#A2ACBA;
+  --line:#2C3746; --accent:#8FB4DB; --accent-soft:#1F3044; --gold:#D3AE66; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151E; --surface:#18212D; --ink:#E5E9F0; --muted:#A2ACBA;
+  --line:#2C3746; --accent:#8FB4DB; --accent-soft:#1F3044; --gold:#D3AE66; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:24px 48px}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:2.1rem}
+h2{font-size:1.45rem}
+h3{font-size:1.15rem}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 20px;display:flex;flex-direction:column;gap:16px}
+.verse{font-family:var(--display);font-style:italic;font-size:1.1rem;color:var(--muted);border-left:2px solid var(--gold);padding-left:14px}
+.verse cite{display:block;font-style:normal;font-size:.85rem;margin-top:4px;font-family:var(--body)}
+.meta{color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--accent);color:var(--surface);border:0;border-radius:999px;padding:12px 22px;font-weight:600;align-self:flex-start}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn:focus-visible,.opt:focus-visible,.link:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.link{background:none;border:0;color:var(--muted);padding:6px 0;text-decoration:underline}
+
+.progress{display:flex;flex-direction:column;gap:8px}
+.track{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--accent);transition:width .35s ease}
+.step{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.vowtag{color:var(--gold);font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{text-align:left;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px 16px;line-height:1.4;transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--accent)}
+.opt.picked{border-color:var(--accent);background:var(--accent-soft)}
+
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar-head{display:flex;justify-content:space-between;gap:8px;font-size:.95rem}
+.bar-head b{font-family:var(--display);font-size:1.05rem}
+.bar-head span{color:var(--muted)}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:8px}
+.bar.gold i{background:var(--gold)}
+.pill{display:inline-block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;align-self:flex-start}
+.pill.gold{color:var(--gold)}
+ul.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+label{font-weight:600;font-size:.95rem}
+textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:vertical}
+.field{display:flex;flex-direction:column;gap:6px}
+.note{font-size:.88rem;color:var(--muted)}
+.toast{font-size:.9rem;color:var(--accent)}
+.credit{max-width:560px;margin:32px auto 0;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:.88rem;color:var(--muted)}
+.credit b{font-family:var(--display);font-weight:600;color:var(--ink)}
+.byline{font-size:.95rem;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.fill,.opt{transition:none}}
+</style>
+
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<footer class="credit">Prepared by <b>Fr. Solomon Nirmalan, CMF</b></footer>
+
+<script>
+const VOWS = {
+  C:{name:"Chastity", short:"a heart that loves freely",
+     verse:"Lord, you know everything; you know that I love you.", ref:"John 21:17",
+     strong:"Your heart seems to rest in the Lord, and your love for your sisters is warm and open. Thank God for this gift. Ask how you can share this warmth with a sister who feels left out.",
+     grow:"The Lord may be inviting you to look at where your heart goes when you are tired or lonely, and how open your love is to every sister in the house.",
+     question:"If Jesus asked me today, \"Do you love me more than these?\", what are \"these\" in my life right now?",
+     steps:["Give the Lord a few quiet minutes when you come home tired, before anything else.","Sit with a sister you rarely talk to, at one meal this week.","Keep your phone away during prayer and community time."]},
+  P:{name:"Poverty", short:"open hands, shared life",
+     verse:"The community of believers was of one heart and mind, and no one claimed that any of their possessions was their own.", ref:"Acts 4:32",
+     strong:"You seem free with your things, your time and your gifts. This openness builds trust in the community. Ask the Lord to keep your hands open, especially with your time.",
+     grow:"The Lord may be inviting you to open your hand on something you hold tightly: your time, a skill, a role, or some quiet possessions.",
+     question:"What is one thing I find hard to share, and is the Lord asking me to let go of it this year?",
+     steps:["Offer one hour each week to a sister who needs company or help.","Teach someone a task that only you know how to do.","Look at your room and return what you do not need to the common store."]},
+  O:{name:"Obedience", short:"listening together for God's will",
+     verse:"Speak, Lord, for your servant is listening.", ref:"1 Samuel 3:10",
+     strong:"You seem able to listen, to speak honestly and to let go of your own will with peace. This makes community decisions easier for everyone. Ask the Lord to keep your listening deep.",
+     grow:"The Lord may be inviting you to listen more deeply, to speak honestly before decisions, and to accept with a peaceful heart afterwards.",
+     question:"When was obedience last hard for me, and what was the Lord trying to teach me through it?",
+     steps:["In the next community meeting, listen fully before you respond.","If you disagree with a decision, speak to the superior directly, not to others.","Pray each morning: \"Speak, Lord, your servant is listening.\""]}
+};
+
+const QUESTIONS = [
+  {v:"C", q:"After a long and tiring day in the mission, you come home feeling lonely and unseen. What do you usually do?", o:[
+    ["I pick up my phone and scroll until I feel better.",1],
+    ["I spend a few quiet minutes with the Lord in the chapel and tell him how I feel.",3],
+    ["I keep it to myself and become a little cold with the sisters.",0],
+    ["I share it simply with a sister I trust.",2]]},
+  {v:"P", q:"A relative gives you some money personally for your feast day. What do you do with it?", o:[
+    ["I keep part of it for my small needs and give the rest.",1],
+    ["I tell the superior and ask how I may use it.",2],
+    ["I keep it quietly. It was a personal gift.",0],
+    ["I hand it to the community, as our Constitutions ask.",3]]},
+  {v:"O", q:"The superior makes a decision that you do not agree with. What is closest to your response?", o:[
+    ["I share my view honestly and respectfully, then accept the decision in peace.",3],
+    ["I accept it, but I complain about it to one or two sisters.",1],
+    ["I accept it in silence, though my heart feels heavy for a while.",2],
+    ["I say yes, but I quietly do things my own way.",0]]},
+  {v:"C", q:"In your community, the same two or three sisters always sit and talk together. You are one of them. What do you do?", o:[
+    ["I see it is natural. Everyone has close friends.",1],
+    ["I notice it, but I find it hard to change.",2],
+    ["I prefer it this way. The other sisters are difficult.",0],
+    ["I make a real effort to include others and widen the circle.",3]]},
+  {v:"P", q:"A younger sister asks you to teach her the work you do well, like the accounts or the sacristy. How do you respond?", o:[
+    ["I teach her gladly and let her try, even if she makes mistakes.",3],
+    ["I tell her I am too busy right now.",1],
+    ["I teach her, but I keep the important parts to myself.",2],
+    ["Honestly, I feel nobody can do it as well as I do.",0]]},
+  {v:"O", q:"In a community meeting where an important matter is being discerned, what do you usually do?", o:[
+    ["I say what I think, but I do not really listen to the others.",1],
+    ["I stay silent in the meeting and share my real opinion afterwards.",0],
+    ["I speak honestly and listen carefully to every sister.",3],
+    ["I listen well, but I rarely share my own view.",2]]},
+  {v:"C", q:"During recreation, a sister begins to speak badly about another sister who is not present. What do you do?", o:[
+    ["I listen with interest.",1],
+    ["I add something I know about her too.",0],
+    ["I gently change the topic or say something kind about the absent sister.",3],
+    ["I stay quiet and wait for it to pass.",2]]},
+  {v:"P", q:"A sister who is unwell or elderly needs someone to sit with her after supper, during your free hour. What do you do?", o:[
+    ["I give my time freely. Being with her is also mission.",3],
+    ["I go sometimes, when I am not too tired.",2],
+    ["I usually find a reason to avoid it.",0],
+    ["I rarely go. My free hour is precious to me.",1]]},
+  {v:"O", q:"You are asked to leave your present mission and go to a new place far away. What is your first response?", o:[
+    ["I agree, but I hope inside that the decision will change.",1],
+    ["I need some time to pray, and then I am ready to go.",2],
+    ["I look for good reasons why I should not be sent.",0],
+    ["I say, \"Here I am, send me,\" with trust in the Lord.",3]]},
+  {v:"C", q:"How would you describe the place of your phone in your life in community?", o:[
+    ["It stays away during prayer, meals and community time.",3],
+    ["It is often the first and last thing I look at each day.",1],
+    ["I check it now and then during community time.",2],
+    ["If I am honest, it gets more of my attention than the sisters in my house.",0]]},
+  {v:"P", q:"When you look at your room and your cupboard, what do you see?", o:[
+    ["Some extra things, but I would give them up without much difficulty.",2],
+    ["Many things that I would find hard to let go of.",1],
+    ["Only what I need, and I share things easily.",3],
+    ["I would rather not look too closely.",0]]},
+  {v:"O", q:"A sister gently points out something in your behaviour that hurt her. How do you receive it?", o:[
+    ["I listen, though I feel defensive inside.",2],
+    ["I hold it against her for a long time.",0],
+    ["I receive it openly and thank her for her honesty.",3],
+    ["I immediately explain why I acted that way.",1]]}
+];
+
+const app = document.getElementById("app");
+let i = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+const store = {
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+};
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]))}
+
+function intro(){
+  app.innerHTML = `
+    <div class="card">
+      <span class="eyebrow">Day of Recollection</span>
+      <h1>Living My Vows</h1>
+      <p class="byline">A reflection by Fr. Solomon Nirmalan, CMF</p>
+      <p>Before you renew your vows, take a few quiet minutes with this reflection. You will meet twelve simple situations from community life. Choose the answer that is closest to how you really live, not how you would like to live.</p>
+      <p class="verse">I will lead her into the desert and speak to her heart.<cite>Hosea 2:14</cite></p>
+      <p class="meta">12 situations · about 8 minutes · your answers stay on this phone</p>
+      <button class="btn" id="start">Begin in prayer</button>
+    </div>
+    <p class="note">This is a mirror for prayer, not a test. No one sees your answers, and there are no marks.</p>`;
+  document.getElementById("start").onclick = ()=>{i=0;question();};
+}
+
+function question(){
+  const item = QUESTIONS[i], pct = Math.round(i/QUESTIONS.length*100);
+  app.innerHTML = `
+    <div class="progress">
+      <div class="step"><span class="vowtag">${VOWS[item.v].name}</span><span>${i+1} of ${QUESTIONS.length}</span></div>
+      <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="card">
+      <h2>${esc(item.q)}</h2>
+      <div class="opts">${item.o.map((o,k)=>`<button class="opt${answers[i]===k?" picked":""}" data-k="${k}" id="opt-${i}-${k}">${esc(o[0])}</button>`).join("")}</div>
+    </div>
+    <div class="row">${i>0?`<button class="link" id="back">Back</button>`:""}</div>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    answers[i]=+b.dataset.k; b.classList.add("picked");
+    setTimeout(()=>{ if(i<QUESTIONS.length-1){i++;question();} else result(); },220);
+  });
+  const back=document.getElementById("back"); if(back) back.onclick=()=>{i--;question();};
+  window.scrollTo(0,0);
+}
+
+function level(s){
+  if(s>=10) return "Deeply rooted";
+  if(s>=7) return "Growing steadily";
+  if(s>=4) return "Asking for care";
+  return "Calling for attention";
+}
+
+function result(){
+  const score={C:0,P:0,O:0};
+  QUESTIONS.forEach((q,k)=>{score[q.v]+=q.o[answers[k]][1];});
+  const order=["C","P","O"];
+  const strong=order.reduce((a,b)=>score[b]>score[a]?b:a);
+  const grow=order.reduce((a,b)=>score[b]<score[a]?b:a);
+  const same = strong===grow;
+  const g=VOWS[grow], s=VOWS[strong];
+
+  app.innerHTML = `
+    <div class="card">
+      <span class="eyebrow">Your reflection</span>
+      <h1>What the Lord may be saying</h1>
+      <p>Read this slowly. It is not a judgement on your vocation. It is only a light on where you are today.</p>
+      <div class="bars">${order.map(v=>`
+        <div>
+          <div class="bar-head"><b>${VOWS[v].name}</b><span>${level(score[v])}</span></div>
+          <div class="bar${v===grow&&!same?" gold":""}"><i style="width:${Math.round(score[v]/12*100)}%"></i></div>
+        </div>`).join("")}</div>
+    </div>
+
+    ${same?`
+    <div class="card">
+      <span class="pill">All three vows</span>
+      <h2>Living the vows as one</h2>
+      <p>Your answers are balanced across the three vows. Thank the Lord for this. Pray with the one vow that you feel most drawn to deepen as you prepare to renew.</p>
+    </div>`:`
+    <div class="card">
+      <span class="pill">A gift to give thanks for</span>
+      <h2>${s.name}: ${s.short}</h2>
+      <p>${s.strong}</p>
+    </div>
+    <div class="card">
+      <span class="pill gold">An invitation to grow</span>
+      <h2>${g.name}: ${g.short}</h2>
+      <p>${g.grow}</p>
+      <p class="verse">${g.verse}<cite>${g.ref}</cite></p>
+      <h3>Take this question into prayer</h3>
+      <p>${esc(g.question)}</p>
+      <h3>One small step for this week</h3>
+      <ul class="plain">${g.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    </div>`}
+
+    <div class="card">
+      <span class="eyebrow">Before you renew</span>
+      <h2>My renewal intention</h2>
+      <p>Lord, when I renew my vows, I want to live them especially in my community by...</p>
+      <div class="field"><label for="in-c">Chastity</label><textarea id="in-c" placeholder="for example, giving warm attention to every sister"></textarea></div>
+      <div class="field"><label for="in-p">Poverty</label><textarea id="in-p" placeholder="for example, offering my free hour to our older sisters"></textarea></div>
+      <div class="field"><label for="in-o">Obedience</label><textarea id="in-o" placeholder="for example, listening fully before I speak"></textarea></div>
+      <div class="row"><button class="btn" id="copy">Copy my intention</button><span class="toast" id="toast" hidden></span></div>
+      <p class="note">Copy it into your notes or write it on the card you will keep in your Bible. It is saved only on this phone.</p>
+    </div>
+
+    <p class="verse">Remain in my love. Love one another as I have loved you.<cite>John 15:9, 12</cite></p>
+    <div class="row"><button class="btn ghost" id="again">Begin again</button><button class="link" id="review">Review my answers</button></div>`;
+
+  ["c","p","o"].forEach(k=>{
+    const t=document.getElementById("in-"+k);
+    t.value=store.get("lmv-"+k)||"";
+    t.oninput=()=>store.set("lmv-"+k,t.value);
+  });
+  document.getElementById("copy").onclick=()=>{
+    const v=k=>document.getElementById("in-"+k).value.trim()||"...";
+    const text=`Lord, when I renew my vows, I want to live chastity by ${v("c")}, poverty by ${v("p")}, and obedience by ${v("o")}, especially in my community. Amen.`;
+    const toast=document.getElementById("toast");
+    const done=m=>{toast.textContent=m;toast.hidden=false;};
+    try{
+      navigator.clipboard.writeText(text).then(()=>done("Copied"),()=>{done("Select the text below to copy");fallback(text);});
+    }catch(e){done("Select the text below to copy");fallback(text);}
+  };
+  document.getElementById("again").onclick=()=>{answers.fill(null);intro();window.scrollTo(0,0);};
+  document.getElementById("review").onclick=()=>{i=0;question();};
+  window.scrollTo(0,0);
+}
+
+function fallback(text){
+  let box=document.getElementById("copybox");
+  if(!box){box=document.createElement("textarea");box.id="copybox";box.readOnly=true;document.getElementById("copy").closest(".card").appendChild(box);}
+  box.value=text;box.focus();box.select();
+}
+
+intro();
+</script>
+</body>
+</html>
