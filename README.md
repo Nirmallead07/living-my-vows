@@ -2,7 +2,7 @@
 
 A short reflection on prayer, chastity, poverty and obedience in community life, prepared for a day of recollection for sisters preparing to renew their vows.
 
-Prepared by Fr. Solomon Nirmalan, CMF.
+Prepared by Fr. Solomon Anthony Nirmalan, CMF.
 
 ## About the tool
 
