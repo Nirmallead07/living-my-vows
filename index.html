@@ -80,6 +80,10 @@ textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1p
 .toast{font-size:.9rem;color:var(--accent)}
 .credit{max-width:560px;margin:32px auto 0;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:.88rem;color:var(--muted)}
 .credit b{font-family:var(--display);font-weight:600;color:var(--ink)}
+.about{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 20px}
+.about summary{cursor:pointer;padding:16px 0;font-family:var(--display);font-weight:600;font-size:1.1rem;list-style-position:inside}
+.about summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.about .about-body{display:flex;flex-direction:column;gap:12px;padding-bottom:20px}
 @media (prefers-reduced-motion: reduce){.fill,.opt{transition:none}}
 </style>
 </head>
@@ -223,7 +227,15 @@ function intro(){
       <p class="meta">16 situations · about 11 minutes · your answers stay on this phone</p>
       <button class="btn" id="start">Begin in prayer</button>
     </div>
-    <p class="note">This is a mirror for prayer, not a test. No one sees your answers, and there are no marks.</p>`;
+    <p class="note">This is a mirror for prayer, not a test. No one sees your answers, and there are no marks.</p>
+    <details class="about" id="about">
+      <summary>About this reflection</summary>
+      <div class="about-body">
+        <p>Living My Vows is a short reflection for consecrated women preparing to renew their vows. It was prepared for a day of recollection on chastity, poverty and obedience as they are lived in community, with prayer as the root of all three.</p>
+        <p>You meet sixteen situations from everyday convent and mission life and choose the answer closest to how you really live. At the end you see which area is a gift to thank God for and which one is an invitation to grow. Each comes with a passage from Scripture, a question for prayer and a few small steps for the week. You can then write your own renewal intention.</p>
+        <p>The reflection is a mirror for personal prayer. It is not a test or an evaluation, and its results should not be used to compare sisters. Nothing is sent anywhere. Your answers stay only on your own phone.</p>
+      </div>
+    </details>`;
   document.getElementById("start").onclick = ()=>{i=0;question();};
 }
 
