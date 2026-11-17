@@ -85,6 +85,13 @@ textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1p
 .about .about-body{display:flex;flex-direction:column;gap:12px;padding-bottom:20px}
 .about .dev-name{font-family:var(--display);font-weight:600;font-size:1.05rem}
 .about .langs{font-size:.92rem;color:var(--muted)}
+.area{display:flex;flex-direction:column;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.area:last-child{border-bottom:0;padding-bottom:0}
+.area-name{font-family:var(--display);font-size:1.1rem}
+.sub-head{display:flex;justify-content:space-between;gap:8px;font-size:.9rem;color:var(--muted);flex-wrap:wrap}
+.opts.scale{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts.scale .opt{text-align:center}
+.clear-card{background:transparent}
 @media (prefers-reduced-motion: reduce){.fill,.opt{transition:none}}
 </style>
 </head>
@@ -235,28 +242,65 @@ const QUESTIONS = [
     ["I immediately explain why I acted that way.",1]]}
 ];
 
+const FAITH = [
+  {v:"L", q:"I keep a daily time of personal prayer, apart from community prayer.", k:"+"},
+  {v:"L", q:"I go to the sacrament of Reconciliation regularly.", k:"+"},
+  {v:"L", q:"I miss or shorten the Divine Office or community prayer without a real reason.", k:"-"},
+  {v:"L", q:"I take part in the Eucharist with attention and desire, not only out of habit.", k:"+"},
+  {v:"L", q:"I spend more time on my phone and social media than I meant to.", k:"-"},
+  {v:"L", q:"My time on reels, videos or social media takes away from my prayer or my work.", k:"-"},
+  {v:"L", q:"On a usual day, how much time do you spend on social media and videos, not counting work?", note:"If you are not sure, check your phone's screen time.", o:[
+    ["Less than 30 minutes",3],["30 minutes to 1 hour",2],["1 to 2 hours",1],["More than 2 hours",0]]},
+  {v:"M", q:"I take part in community meetings and share honestly.", k:"+"},
+  {v:"M", q:"I keep confidential what is shared within the community.", k:"+"},
+  {v:"M", q:"I avoid a sister I am in conflict with instead of seeking reconciliation.", k:"-"},
+  {v:"C", rel:true, q:"There is a relationship or emotional attachment in my life that is not in keeping with my vow.", o:[
+    ["Not true for me",3],["It was true, but I have ended it",2],["It is true, and I am trying to end it",1],["It is true, and it is continuing",0]]},
+  {v:"C", q:"I keep messages, contacts or online conversations that I would not want my superior or sisters to see.", k:"-"},
+  {v:"C", q:"I keep healthy boundaries with priests, co-workers and the people I serve, including in private meetings and on the phone.", k:"+"},
+  {v:"C", q:"I look at content online that is not in keeping with my consecration.", k:"-"},
+  {v:"C", q:"I have long or late-night conversations, by phone or message, with one particular person.", k:"-"},
+  {v:"C", q:"There is one person outside the community with whom I share everything, including what happens among my sisters.", k:"-"},
+  {v:"C", q:"One relationship takes more of my time, thoughts and energy than my mission and my community.", k:"-"},
+  {v:"P", q:"I keep money, an account or valuables that my community does not know about.", k:"-"},
+  {v:"P", q:"I give a clear and honest account of the money I spend.", k:"+"},
+  {v:"P", q:"I want the newest and best things for myself, such as a phone, shoes, clothes or bags.", k:"-"},
+  {v:"P", q:"I keep gifts for myself, or ask for things, so that I can have more.", k:"-"},
+  {v:"O", q:"I make plans, travel or take on commitments without the permission our Constitutions require.", k:"-"},
+  {v:"O", q:"I accept appointments and transfers with an open heart, even when they are hard.", k:"+"},
+  {v:"O", q:"I keep the rules and timetable of the house only when someone is watching.", k:"-"},
+  {v:"H", honesty:true, q:"I have never once been impatient with a sister.", o:[["Yes",1],["No",0]]},
+  {v:"H", honesty:true, q:"I have never missed a prayer I was meant to attend, for any reason.", o:[["Yes",1],["No",0]]},
+  {v:"H", honesty:true, q:"I have never felt envy towards anyone in my community.", o:[["Yes",1],["No",0]]}
+];
+const FREQ = ["Never","Sometimes","Often","Always"];
+
 const N = QUESTIONS.length;
+const F = FAITH.length;
 const app = document.getElementById("app");
-let i = 0;
+let i = 0, j = 0;
 let answers = new Array(N).fill(null);   // number = option index, "none" = none of these
 let notes = new Array(N).fill("");
+let fans = new Array(F).fill(null);      // number = option index, "skip" = skipped
 const store = {
   get(k){try{return localStorage.getItem(k)}catch(e){return null}},
-  set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
 };
 
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]))}
 
-function intro(){
+function intro(msg){
   app.innerHTML = `
+    ${msg?`<p class="toast" role="status">${esc(msg)}</p>`:""}
     <div class="card">
       <span class="eyebrow">Day of Recollection</span>
       <h1>Living My Vows</h1>
       <p class="byline">A reflection by Fr. Solomon Anthony Nirmalan, CMF</p>
-      <p>Before you renew your vows, take a few quiet minutes with this reflection. You will meet twenty simple situations from prayer and community life, and one quiet question about how you feel at home. Choose the answer that is closest to how you really live, not how you would like to live.</p>
-      <p>If none of the answers truly fits you, you may choose "None of these describes me" and write a few words of your own. Use it only when none truly fits.</p>
+      <p>Before you renew your vows, take some quiet time with this reflection. It has two parts. In Part One you meet twenty situations from prayer and community life, and one quiet question about how you feel at home. In Part Two you answer twenty-seven short statements about your personal faithfulness to prayer and to your vows.</p>
+      <p>Choose the answer that is closest to how you really live, not how you would like to live. In Part One, if none of the answers truly fits you, you may choose "None of these describes me" and write a few words of your own. Use it only when none truly fits.</p>
       <p class="verse">I will lead her into the desert and speak to her heart.<cite>Hosea 2:14</cite></p>
-      <p class="meta">20 situations and 1 check-in · about 14 minutes · your answers stay on this phone</p>
+      <p class="meta">Two parts · about 20 minutes · your answers stay on this phone</p>
       <button class="btn" id="start">Begin in prayer</button>
     </div>
     <p class="note">This is a mirror for prayer, not a test. No one sees your answers, and there are no marks.</p>
@@ -264,8 +308,8 @@ function intro(){
       <summary>About this reflection</summary>
       <div class="about-body">
         <p>Living My Vows is a short reflection for consecrated women preparing to renew their vows. It was prepared for a day of recollection on chastity, poverty and obedience as they are lived in community. Prayer is the root of all three, and community is the home we go out from in mission and come back to.</p>
-        <p>You meet twenty situations from everyday convent and mission life and choose the answer closest to how you really live. At the end you see which area is a gift to thank God for and which one is an invitation to grow. Each comes with a passage from Scripture, a question for prayer and a few small steps for the week. You can then write your own renewal intention.</p>
-        <p>The reflection is a mirror for personal prayer. It is not a test or an evaluation, and its results should not be used to compare sisters. Nothing is sent anywhere. Your answers stay only on your own phone.</p>
+        <p>Part One presents twenty situations from everyday convent and mission life. Part Two asks about the quieter core of each vow and of prayer: personal prayer and the sacraments, relationships and boundaries, money and possessions, permissions, and time on the phone. At the end you see two marks for each area, one for how you live it with others and one for your personal faithfulness. You also see which area is a gift to thank God for and which one is an invitation to grow, with a passage from Scripture, a question for prayer and a few small steps for the week. You can then write your own renewal intention.</p>
+        <p>The reflection is a mirror for personal prayer. It is not a test or an evaluation, and its results should not be used to compare sisters. Nothing is sent anywhere. Your answers stay only on your own phone, and you can clear them when you finish.</p>
       </div>
     </details>
     <details class="about" id="developer">
@@ -279,18 +323,19 @@ function intro(){
       </div>
     </details>`;
   document.getElementById("start").onclick = ()=>{i=0;question();};
+  window.scrollTo(0,0);
 }
 
 function next(){
-  if(i<N-1){i++;question();} else result();
+  if(i<N-1){i++;question();} else partTwo();
 }
 
 function question(){
-  const item = QUESTIONS[i], pct = Math.round(i/N*100);
+  const item = QUESTIONS[i], pct = Math.round(i/(N+F)*100);
   const isNone = answers[i]==="none";
   app.innerHTML = `
     <div class="progress">
-      <div class="step"><span class="vowtag">${item.check?"A quiet check-in":VOWS[item.v].name}</span><span>${i+1} of ${N}</span></div>
+      <div class="step"><span class="vowtag">${item.check?"A quiet check-in":VOWS[item.v].name}</span><span>Part One · ${i+1} of ${N}</span></div>
       <div class="track"><div class="fill" style="width:${pct}%"></div></div>
     </div>
     <div class="card">
@@ -326,6 +371,65 @@ function question(){
   window.scrollTo(0,0);
 }
 
+function partTwo(){
+  app.innerHTML = `
+    <div class="progress">
+      <div class="step"><span class="vowtag">Part Two</span><span>${F} short statements</span></div>
+      <div class="track"><div class="fill" style="width:${Math.round(N/(N+F)*100)}%"></div></div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Part Two</span>
+      <h1>My faithfulness</h1>
+      <p>Part One looked at how you live your vows with others. Part Two looks at the quieter core of each vow and of your prayer: what you do when no one is watching.</p>
+      <p>Think of the past three months. Answer as you really are, not as you would like to be. No one will see these answers, and they will not be repeated on your result page.</p>
+      <p class="verse">O Lord, you have searched me and you know me.<cite>Psalm 139:1</cite></p>
+      <p class="meta">${F} short statements · about 5 minutes</p>
+      <button class="btn" id="p2start">Begin Part Two</button>
+    </div>
+    <div class="row"><button class="link" id="back">Back</button></div>`;
+  document.getElementById("p2start").onclick=()=>{j=0;fquestion();};
+  document.getElementById("back").onclick=()=>{i=N-1;question();};
+  window.scrollTo(0,0);
+}
+
+function fnext(){
+  if(j<F-1){j++;fquestion();} else result();
+}
+
+function fquestion(){
+  const item = FAITH[j], pct = Math.round((N+j)/(N+F)*100);
+  const labels = item.o ? item.o.map(o=>o[0]) : FREQ;
+  const tag = item.honesty ? "Honesty check" : VOWS[item.v].name;
+  app.innerHTML = `
+    <div class="progress">
+      <div class="step"><span class="vowtag">${tag}</span><span>Part Two · ${j+1} of ${F}</span></div>
+      <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="card">
+      ${item.honesty?`<p class="note">Answer simply, yes or no.</p>`:(item.o?"":`<p class="note">In the past three months...</p>`)}
+      <h2>${esc(item.q)}</h2>
+      ${item.note?`<p class="note">${esc(item.note)}</p>`:""}
+      <div class="opts${item.o?"":" scale"}">${labels.map((l,k)=>`<button class="opt${fans[j]===k?" picked":""}" data-k="${k}" id="fopt-${j}-${k}">${esc(l)}</button>`).join("")}</div>
+      ${item.honesty?"":`<button class="none-opt${fans[j]==="skip"?" picked":""}" id="skip-${j}">Skip this one</button>`}
+    </div>
+    <div class="row"><button class="link" id="back">Back</button></div>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    fans[j]=+b.dataset.k;
+    app.querySelectorAll(".opt").forEach(x=>x.classList.remove("picked"));
+    b.classList.add("picked");
+    setTimeout(fnext,220);
+  });
+  const sk=document.getElementById("skip-"+j);
+  if(sk) sk.onclick=()=>{fans[j]="skip";fnext();};
+  document.getElementById("back").onclick=()=>{ if(j>0){j--;fquestion();} else partTwo(); };
+  window.scrollTo(0,0);
+}
+
+function fvalue(item,a){
+  if(item.o) return item.o[a][1];
+  return item.k==="+" ? a : 3-a;
+}
+
 function level(r){
   if(r>=0.83) return "Deeply rooted";
   if(r>=0.58) return "Growing steadily";
@@ -347,15 +451,71 @@ function computeScores(){
   return out;
 }
 
+function computeFaith(){
+  const out={};
+  ORDER.forEach(v=>{
+    let sum=0, answered=0, n=0;
+    FAITH.forEach((q,k)=>{
+      if(q.v!==v) return;
+      n++;
+      if(fans[k]===null||fans[k]==="skip") return;
+      sum+=fvalue(q,fans[k]); answered++;
+    });
+    out[v] = (answered && answered>=Math.ceil(n*2/3)) ? sum/(answered*3) : null;
+  });
+  return out;
+}
+
 function result(){
-  const score = computeScores();
-  const scored = ORDER.filter(v=>score[v]!==null);
+  const together = computeScores();
+  const faith = computeFaith();
+  const comb = {};
+  ORDER.forEach(v=>{
+    const parts=[together[v],faith[v]].filter(x=>x!==null);
+    comb[v] = parts.length ? parts.reduce((a,b)=>a+b,0)/parts.length : null;
+  });
+  const scored = ORDER.filter(v=>comb[v]!==null);
   let strong=null, grow=null;
   if(scored.length){
-    strong=scored.reduce((a,b)=>score[b]>score[a]?b:a);
-    grow=scored.reduce((a,b)=>score[b]<score[a]?b:a);
+    strong=scored.reduce((a,b)=>comb[b]>comb[a]?b:a);
+    grow=scored.reduce((a,b)=>comb[b]<comb[a]?b:a);
   }
-  const balanced = !scored.length || score[strong]===score[grow];
+  const balanced = !scored.length || comb[strong]===comb[grow];
+  const strongIsGift = strong && [together[strong],faith[strong]].every(x=>x!==null&&x>=0.58);
+
+  // honesty check
+  const yesCount = FAITH.reduce((n,q,k)=>n+(q.honesty&&fans[k]===0?1:0),0);
+  const honestyCard = yesCount>=2 ? `
+    <div class="card">
+      <span class="pill gold">A gentle word</span>
+      <h2>No one is perfect</h2>
+      <p>No one lives the vows perfectly, and the Lord does not ask us to pretend. You may want to read your answers again slowly, with simple honesty before him.</p>
+      <p class="verse">If we say, "We are without sin," we deceive ourselves. If we acknowledge our sins, he is faithful and just.<cite>1 John 1:8-9</cite></p>
+    </div>` : "";
+
+  // relationship question
+  const ri = FAITH.findIndex(q=>q.rel);
+  const rel = fans[ri];
+  let relCard = "";
+  if(rel===2||rel===3){
+    relCard = `
+    <div class="card">
+      <span class="pill gold">A word for your heart</span>
+      <h2>You are not alone</h2>
+      <p>The Lord does not turn away from you. He knows the struggle of your heart better than you do. Please do not carry this alone. Speak with your confessor, a spiritual director or a superior you trust. Many have walked this road and found freedom again.</p>
+      <p>If someone with power over you, a priest, a superior, an employer or anyone else, has pressured you, used you or harmed you, it is not your fault. You have the right to be safe and to seek help.</p>
+      <p class="verse">I have called you by name: you are mine.<cite>Isaiah 43:1</cite></p>
+    </div>`;
+  } else if(rel===1){
+    relCard = `
+    <div class="card">
+      <span class="pill">A word for your heart</span>
+      <h2>Thank God for your courage</h2>
+      <p>Letting go takes courage and grace. Thank the Lord for it. Keep a guide close, a confessor or a spiritual director, so that your heart stays free and at peace.</p>
+    </div>`;
+  }
+
+  // appreciation check-in
   const ci = QUESTIONS.findIndex(q=>q.check);
   const felt = answers[ci];
   let feltCard = "";
@@ -402,7 +562,12 @@ function result(){
     </div>`;
   } else {
     const s=VOWS[strong], g=VOWS[grow];
-    middle = (score[strong]>=0.58 ? `
+    let which="";
+    if(together[grow]!==null&&faith[grow]!==null){
+      if(faith[grow] < together[grow]-0.15) which = `<p>In this area, your personal faithfulness asks for more attention than your life with others. Look gently at what you do when no one is watching.</p>`;
+      else if(together[grow] < faith[grow]-0.15) which = `<p>In this area, your life with your sisters asks for more attention than your personal practice. Look gently at how you live this vow with others.</p>`;
+    }
+    middle = (strongIsGift ? `
     <div class="card">
       <span class="pill">A gift to give thanks for</span>
       <h2>${s.name}: ${s.short}</h2>
@@ -412,6 +577,7 @@ function result(){
       <span class="pill gold">An invitation to grow</span>
       <h2>${g.name}: ${g.short}</h2>
       <p>${g.grow}</p>
+      ${which}
       <p class="verse">${g.verse}<cite>${g.ref}</cite></p>
       <h3>Take this question into prayer</h3>
       <p>${esc(g.question)}</p>
@@ -420,27 +586,38 @@ function result(){
     </div>`;
   }
 
+  const row = (label, r, gold, msg) => r===null ? `
+          <div class="sub">
+            <div class="sub-head"><span>${label}</span></div>
+            <p class="unscored">${msg}</p>
+          </div>` : `
+          <div class="sub">
+            <div class="sub-head"><span>${label}</span><span>${level(r)}</span></div>
+            <div class="bar${gold?" gold":""}"><i style="width:${Math.max(4,Math.round(r*100))}%"></i></div>
+          </div>`;
+
   app.innerHTML = `
     <div class="card">
       <span class="eyebrow">Your reflection</span>
       <h1>What the Lord may be saying</h1>
       <p>Read this slowly. It is not a judgement on your vocation. It is only a light on where you are today.</p>
+      <p class="note">For each area, the first mark shows how you live it with others (Part One). The second shows your personal faithfulness (Part Two).</p>
       <div class="bars">${ORDER.map(v=>{
-        const r=score[v];
-        if(r===null) return `
-        <div>
-          <div class="bar-head"><b>${VOWS[v].name}</b></div>
-          <p class="unscored">You found it hard to place yourself in these situations. Stay with this area in prayer.</p>
-        </div>`;
+        const g = v===grow&&!balanced;
         return `
-        <div>
-          <div class="bar-head"><b>${VOWS[v].name}</b><span>${level(r)}</span></div>
-          <div class="bar${v===grow&&!balanced?" gold":""}"><i style="width:${Math.max(4,Math.round(r*100))}%"></i></div>
+        <div class="area">
+          <b class="area-name">${VOWS[v].name}</b>
+          ${row("Living it together", together[v], g, "You found it hard to place yourself in these situations. Stay with this area in prayer.")}
+          ${row("My faithfulness", faith[v], g, "You skipped several statements here. Stay with this area in prayer.")}
         </div>`;}).join("")}</div>
       <p class="root-note">Prayer is the root. Community is the home we go out from and come back to. Chastity, poverty and obedience are its fruit.</p>
     </div>
 
+    ${honestyCard}
+
     ${middle}
+
+    ${relCard}
 
     ${feltCard}
 
@@ -466,7 +643,12 @@ function result(){
     </div>
 
     <p class="verse">Remain in my love. Love one another as I have loved you.<cite>John 15:9, 12</cite></p>
-    <div class="row"><button class="btn ghost" id="again">Begin again</button><button class="link" id="review">Review my answers</button></div>`;
+    <div class="row"><button class="btn ghost" id="again">Begin again</button><button class="link" id="review">Review my answers</button></div>
+    <div class="card clear-card">
+      <h3>When you have finished</h3>
+      <p class="note">If others may use this phone, clear your answers and your written intention.</p>
+      <button class="btn ghost" id="clear">Clear my answers</button>
+    </div>`;
 
   ["l","m","c","p","o"].forEach(k=>{
     const t=document.getElementById("in-"+k);
@@ -482,8 +664,14 @@ function result(){
       navigator.clipboard.writeText(text).then(()=>done("Copied"),()=>{done("Select the text below to copy");fallback(text);});
     }catch(e){done("Select the text below to copy");fallback(text);}
   };
-  document.getElementById("again").onclick=()=>{answers.fill(null);notes.fill("");intro();window.scrollTo(0,0);};
+  const reset=()=>{answers.fill(null);notes.fill("");fans.fill(null);i=0;j=0;};
+  document.getElementById("again").onclick=()=>{reset();intro();};
   document.getElementById("review").onclick=()=>{i=0;question();};
+  document.getElementById("clear").onclick=()=>{
+    reset();
+    ["l","m","c","p","o"].forEach(k=>store.del("lmv-"+k));
+    intro("Your answers and your intention have been cleared from this phone.");
+  };
   window.scrollTo(0,0);
 }
 

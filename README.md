@@ -6,7 +6,13 @@ Prepared by Fr. Solomon Anthony Nirmalan, CMF.
 
 ## About the tool
 
-Each sister meets twenty situations from everyday convent and mission life, four in each area: prayer and life, community life, chastity, poverty and obedience. One further unscored question asks whether she feels appreciated in her community. She chooses the answer closest to how she really lives, or "None of these describes me" with a few words of her own. At the end she sees which area is a gift to thank God for and which is an invitation to grow, with a Scripture passage, a question for prayer and small practical steps, and she writes her own renewal intention.
+The reflection has two parts.
+
+**Part One: Living it together.** Twenty situations from everyday convent and mission life, four in each area: prayer and life, community life, chastity, poverty and obedience. The sister chooses the answer closest to how she really lives, or "None of these describes me" with a few words of her own. One further unscored question asks whether she feels appreciated in her community.
+
+**Part Two: My faithfulness.** Twenty-seven short statements about the past three months, answered on a scale of never, sometimes, often or always: personal prayer and the sacraments, time on the phone and social media, relationships and boundaries, money and possessions, and permissions. About half are worded negatively, so ticking "always" all the way down does not give a high score. Three yes or no statements check gently for answers that claim perfection.
+
+At the end she sees two marks for each area, one for how she lives it with others and one for her personal faithfulness. She also sees which area is a gift to thank God for and which is an invitation to grow, with a Scripture passage, a question for prayer and small practical steps, and she writes her own renewal intention. Sensitive answers are never repeated on the result page, and a "Clear my answers" button removes everything from the phone.
 
 The tool is a mirror for personal prayer, not a validated measurement instrument. Results should not be used to compare or evaluate sisters.
 
