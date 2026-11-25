@@ -333,7 +333,9 @@ const IMG = {
   words:["img/words.webp","Two hands cupped around a small candle flame"],
   opening:["img/opening.webp","A path through the desert leading to a cross on a hill"],
   partTwo:["img/part-two.webp","A still pool at dusk reflecting a single tree"],
-  journey:["img/journey.webp","A pilgrim walking along a path toward a small chapel"]
+  journey:["img/journey.webp","A pilgrim walking along a path toward a small chapel"],
+  checkin:["img/checkin.webp","A cup of tea on a wooden table beside a handwritten note and a small flower"],
+  home:["img/home.webp","A small house with a lit window under a large fruit tree with deep roots"]
 };
 const pic = (key, cls="art-img") => `<img class="${cls}" src="${IMG[key][0]}" alt="${IMG[key][1]}" width="512" height="343">`;
 const banner = key => `<img class="q-art" src="${IMG[key][0]}" alt="" width="512" height="343">`;
@@ -418,7 +420,7 @@ function question(){
       <div class="track"><div class="fill" style="width:${pct}%"></div></div>
     </div>
     <div class="card">
-      ${item.check?"":banner(item.v)}
+      ${banner(item.check?"checkin":item.v)}
       <h2>${T(item.q)}</h2>
       ${item.note?`<p class="note">${T(item.note)}</p>`:""}
       <div class="opts">${item.o.map((o,k)=>`<button class="opt${answers[i]===k?" picked":""}" data-k="${k}" id="opt-${i}-${k}">${T(o[0])}</button>`).join("")}</div>
@@ -647,6 +649,7 @@ function result(){
   if(felt===2||felt===3){
     feltCard = `
     <div class="card">
+      ${pic("checkin")}
       <span class="pill gold">A word for you</span>
       <h2>You are precious</h2>
       <p class="verse">You are precious in my eyes, and honoured, and I love you.<cite>Isaiah 43:4</cite></p>
@@ -656,6 +659,7 @@ function result(){
   } else if(felt===1){
     feltCard = `
     <div class="card">
+      ${pic("checkin")}
       <span class="pill">A word for you</span>
       <h2>Seen at times</h2>
       <p>Thank God for the moments when you feel seen and valued. Then look around your house. Another ${T("{sis}")} may be waiting for a word of appreciation, and you can give it.</p>
@@ -663,6 +667,7 @@ function result(){
   } else if(felt===0){
     feltCard = `
     <div class="card">
+      ${pic("checkin")}
       <span class="pill">A word for you</span>
       <h2>A gift to give thanks for</h2>
       <p>You feel appreciated in your community. Thank God for your ${T("{sisters}")}, and tell one of them this week how much that means to you.</p>
@@ -725,7 +730,7 @@ function result(){
 
   app.innerHTML = `
     <div class="card">
-      ${pic("journey")}
+      ${pic("home")}
       <span class="eyebrow">Your reflection</span>
       <h1>What the Lord may be saying</h1>
       <p>Read this slowly. It is not a judgement on your vocation. It is only a light on where you are today.</p>
@@ -761,6 +766,7 @@ function result(){
     </div>`:""}
 
     <div class="card">
+      ${pic("journey")}
       <span class="eyebrow">Before you renew</span>
       <h2>My renewal intention</h2>
       <p>Lord, when I renew my vows, I want to live them especially in my community by...</p>
