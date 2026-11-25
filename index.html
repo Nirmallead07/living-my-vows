@@ -99,6 +99,8 @@ textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1p
 .role.picked{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 .role:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.art-img{display:block;width:100%;height:auto;border-radius:12px}
+.q-art{display:block;width:100%;height:auto;aspect-ratio:21/8;object-fit:cover;object-position:center 55%;border-radius:10px}
 @media (prefers-reduced-motion: reduce){.fill,.opt{transition:none}}
 </style>
 </head>
@@ -321,6 +323,20 @@ const FAITH = [
   {v:"H", honesty:true, q:"I have never felt envy towards anyone in my community.", o:[["Yes",1],["No",0]]}
 ];
 const FREQ = ["Never","Sometimes","Often","Always"];
+const IMG = {
+  L:["img/prayer.webp","An open Bible and rosary on a chapel pew beside a door open to a village street"],
+  M:["img/community.webp","A wooden table set for a shared meal, with one chair pulled out"],
+  C:["img/chastity.webp","A spring flowing from a rock into many streams across a green field"],
+  P:["img/poverty.webp","Two open hands holding a few seeds"],
+  O:["img/obedience.webp","An oil lamp glowing in a quiet room at night"],
+  fruit:["img/fruit.webp","A grapevine with deep roots and ripe clusters of grapes"],
+  words:["img/words.webp","Two hands cupped around a small candle flame"],
+  opening:["img/opening.webp","A path through the desert leading to a cross on a hill"],
+  partTwo:["img/part-two.webp","A still pool at dusk reflecting a single tree"],
+  journey:["img/journey.webp","A pilgrim walking along a path toward a small chapel"]
+};
+const pic = (key, cls="art-img") => `<img class="${cls}" src="${IMG[key][0]}" alt="${IMG[key][1]}" width="512" height="343">`;
+const banner = key => `<img class="q-art" src="${IMG[key][0]}" alt="" width="512" height="343">`;
 const GROUP_TAG = {fruit:"Prayer that bears fruit", words:"My words and my heart"};
 
 const N = QUESTIONS.length;
@@ -343,6 +359,7 @@ function intro(msg){
   app.innerHTML = `
     ${msg?`<p class="toast" role="status">${esc(msg)}</p>`:""}
     <div class="card">
+      ${pic("opening")}
       <span class="eyebrow">Day of Recollection</span>
       <h1>Living My Vows</h1>
       <p class="byline">A reflection by Fr. Solomon Anthony Nirmalan, CMF</p>
@@ -401,6 +418,7 @@ function question(){
       <div class="track"><div class="fill" style="width:${pct}%"></div></div>
     </div>
     <div class="card">
+      ${item.check?"":banner(item.v)}
       <h2>${T(item.q)}</h2>
       ${item.note?`<p class="note">${T(item.note)}</p>`:""}
       <div class="opts">${item.o.map((o,k)=>`<button class="opt${answers[i]===k?" picked":""}" data-k="${k}" id="opt-${i}-${k}">${T(o[0])}</button>`).join("")}</div>
@@ -440,6 +458,7 @@ function partTwo(){
       <div class="track"><div class="fill" style="width:${Math.round(N/(N+F)*100)}%"></div></div>
     </div>
     <div class="card">
+      ${pic("partTwo")}
       <span class="eyebrow">Part Two</span>
       <h1>My faithfulness</h1>
       <p>Part One looked at how you live your vows with others. Part Two looks at the quieter core of each vow and of your prayer: what you do when no one is watching, whether your prayer bears fruit, and how you speak about others.</p>
@@ -468,6 +487,7 @@ function fquestion(){
       <div class="track"><div class="fill" style="width:${pct}%"></div></div>
     </div>
     <div class="card">
+      ${item.honesty?"":banner(item.g||item.v)}
       ${item.honesty?`<p class="note">Answer simply, yes or no.</p>`:(item.o?"":`<p class="note">In the past three months...</p>`)}
       <h2>${T(item.q)}</h2>
       ${item.note?`<p class="note">${T(item.note)}</p>`:""}
@@ -566,6 +586,7 @@ function result(){
   if(fruit!==null && fruit<0.58){
     fruitCard = `
     <div class="card">
+      ${pic("fruit")}
       <span class="pill gold">Prayer that bears fruit</span>
       <h2>After the chapel</h2>
       <p>${practice!==null&&practice>=0.58
@@ -583,6 +604,7 @@ function result(){
   if(words!==null && words<0.58){
     wordsCard = `
     <div class="card">
+      ${pic("words")}
       <span class="pill gold">My words and my heart</span>
       <h2>Guarding the good name of others</h2>
       <p>Every person has a right to a good name: your ${T("{sisters}")}, priests, religious of other communities, and anyone you speak about. We are one family in the Church. What we say about one another, even when it is true, can wound the whole family.</p>
@@ -678,6 +700,7 @@ function result(){
       <p>${T(s.strong)}</p>
     </div>` : "") + `
     <div class="card">
+      ${pic(grow)}
       <span class="pill gold">An invitation to grow</span>
       <h2>${g.name}: ${g.short}</h2>
       <p>${T(g.grow)}</p>
@@ -702,6 +725,7 @@ function result(){
 
   app.innerHTML = `
     <div class="card">
+      ${pic("journey")}
       <span class="eyebrow">Your reflection</span>
       <h1>What the Lord may be saying</h1>
       <p>Read this slowly. It is not a judgement on your vocation. It is only a light on where you are today.</p>
