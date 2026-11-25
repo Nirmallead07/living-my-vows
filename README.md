@@ -1,20 +1,26 @@
 # Living My Vows
 
-A short reflection on prayer, community life, chastity, poverty and obedience, prepared for a day of recollection for sisters preparing to renew their vows.
+A short reflection on prayer, community life, chastity, poverty and obedience for sisters, brothers and religious priests, prepared for a day of recollection for sisters preparing to renew their vows.
 
 Prepared by Fr. Solomon Anthony Nirmalan, CMF.
 
 ## About the tool
 
-The reflection has two parts.
+The reflection is for **sisters, brothers and religious priests**. On the opening screen the person chooses Sister, Brother or Priest, and the wording adapts: "sister" or "brother", "her" or "him", and a few statements written specifically for priests (celebrating the Eucharist, boundaries in parish ministry and counselling, parish money and Mass stipends).
 
-**Part One: Living it together.** Twenty situations from everyday convent and mission life, four in each area: prayer and life, community life, chastity, poverty and obedience. The sister chooses the answer closest to how she really lives, or "None of these describes me" with a few words of her own. One further unscored question asks whether she feels appreciated in her community.
+**Part One: Living it together.** Twenty situations from everyday community and mission life, four in each area: prayer and life, community life, chastity, poverty and obedience. The person chooses the answer closest to how they really live, or "None of these describes me" with a few words of their own. One further unscored question asks whether they feel appreciated in their community.
 
-**Part Two: My faithfulness.** Twenty-seven short statements about the past three months, answered on a scale of never, sometimes, often or always: personal prayer and the sacraments, time on the phone and social media, relationships and boundaries, money and possessions, and permissions. About half are worded negatively, so ticking "always" all the way down does not give a high score. Three yes or no statements check gently for answers that claim perfection.
+**Part Two: My faithfulness.** Forty-five short statements about the past three months, answered on a scale of never, sometimes, often or always, with about half worded negatively so that ticking "always" all the way down does not give a high score. They cover:
 
-At the end she sees two marks for each area, one for how she lives it with others and one for her personal faithfulness. She also sees which area is a gift to thank God for and which is an invitation to grow, with a Scripture passage, a question for prayer and small practical steps, and she writes her own renewal intention. Sensitive answers are never repeated on the result page, and a "Clear my answers" button removes everything from the phone.
+- prayer practice: personal prayer, the sacraments, the Office, time on the phone
+- **prayer that bears fruit**: whether prayer changes how one treats people, handles resentment and criticism, and speaks about others
+- **my words and my heart**: gossip, rumours and criticism about one's own community, priests, religious and anyone in the Church; guarding others' good name; forgiveness and resentment
+- relationships and boundaries, money and possessions, permissions
+- three yes or no statements that check gently for answers that claim perfection
 
-The tool is a mirror for personal prayer, not a validated measurement instrument. Results should not be used to compare or evaluate sisters.
+At the end each area shows its marks (two or three per area), which area is a gift to thank God for and which is an invitation to grow, with Scripture, a question for prayer and small practical steps. Extra cards appear where they are needed: when prayer practice is strong but its fruit is weak, when words about others need attention, when a relationship question is answered honestly, and for the appreciation check-in. Sensitive answers are never repeated on the result page, and a "Clear my answers" button removes everything from the phone.
+
+The tool is a mirror for personal prayer, not a validated measurement instrument. Results should not be used to compare or evaluate anyone.
 
 The whole tool is one file, `index.html`. It runs in any phone or computer browser. Answers stay on each person's own device and are never sent anywhere.
 
